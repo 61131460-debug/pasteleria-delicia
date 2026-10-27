@@ -1,0 +1,229 @@
+/* src/App.css */
+:root {
+  --frambuesa: #b8325a;
+  --frambuesa-oscuro: #8f2145;
+  --cacao: #3d2523;
+  --crema: #fff6f6;
+  --glaseado: #fbe3e8;
+  --sombra-suave: rgba(61, 37, 35, 0.12);
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--cacao);
+  background: var(--crema);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; background: var(--crema); }
+img { max-width: 100%; display: block; }
+
+/* ENCABEZADO */
+.encabezado {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: .8rem 5vw;
+  background: rgba(255, 246, 246, 0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glaseado);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.marca { font-weight: 800; font-size: 1.3rem; color: var(--cacao); text-decoration: none; }
+.marca span { color: var(--frambuesa); }
+.encabezado nav { display: flex; gap: 1rem; margin-right: auto; }
+.encabezado nav a { color: inherit; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.encabezado nav a:hover { color: var(--frambuesa); }
+
+/* BOTÓN CARRITO */
+.btn-carrito {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #fff; border: 1.5px solid var(--glaseado);
+  padding: 0.5rem 1rem; border-radius: 99px; font-weight: 700;
+  color: var(--cacao); cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 8px var(--sombra-suave);
+}
+.btn-carrito:hover {
+  border-color: var(--frambuesa);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(184, 50, 90, 0.2);
+}
+.badge-carrito {
+  display: inline-grid; place-items: center; min-width: 1.5rem; height: 1.5rem;
+  padding: 0 0.3rem; border-radius: 99px; background: var(--frambuesa);
+  color: #fff; font-size: 0.8rem;
+  animation: pop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+/* PORTADA */
+.portada {
+  position: relative; z-index: 1;
+  padding: 4.5rem 5vw 3.5rem;
+  background: radial-gradient(circle at 85% 20%, var(--glaseado) 0 25%, transparent 26%);
+}
+.ceja { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; font-weight: 700; color: var(--frambuesa); margin: 0 0 0.5rem; }
+.portada h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); max-width: 16ch; margin: 0 0 1.5rem; line-height: 1.1; }
+
+.boton, .card button {
+  display: inline-block;
+  background: var(--frambuesa); color: #fff; border: 0; border-radius: 0.7rem;
+  padding: 0.65rem 1.2rem; font-weight: 700; text-decoration: none; cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.boton:hover, .card button:hover {
+  background: var(--frambuesa-oscuro);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(184, 50, 90, 0.3);
+}
+.card button:active { transform: scale(0.95); }
+
+/* CATÁLOGO Y FILTROS */
+.catalogo { position: relative; z-index: 1; padding: 2rem 5vw 4rem; }
+.catalogo-cab { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+.filtros { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+.filtros button {
+  border: 1px solid var(--glaseado); background: #fff; border-radius: 99px;
+  padding: 0.45rem 1rem; cursor: pointer; font-weight: 500;
+  transition: all 0.2s ease;
+}
+.filtros button:hover { border-color: var(--frambuesa); background: var(--glaseado); }
+.filtros button.activo { background: var(--frambuesa); color: #fff; border-color: var(--frambuesa); font-weight: 700; }
+.filtros input, .filtros select {
+  padding: 0.45rem 0.8rem; border: 1px solid var(--glaseado); border-radius: 0.6rem;
+  font: inherit; background: #fff; transition: border-color 0.2s;
+}
+.filtros input:focus, .filtros select:focus { outline: none; border-color: var(--frambuesa); }
+
+/* GRILLA DE TARJETAS */
+.grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.5rem; }
+.card {
+  background: #fff; border: 1px solid var(--glaseado); border-radius: 1.2rem; overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: aparece 0.4s ease-out both;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 35px rgba(61, 37, 35, 0.12);
+}
+.foto { overflow: hidden; }
+.foto img {
+  width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.card:hover .foto img { transform: scale(1.09); }
+.card-cuerpo { padding: 1.1rem; display: grid; gap: 0.4rem; }
+.card h3 { margin: 0; font-size: 1.1rem; }
+.etiqueta { justify-self: start; font-size: 0.72rem; font-weight: 700; color: var(--frambuesa); background: var(--glaseado); padding: 0.15rem 0.6rem; border-radius: 99px; }
+.unidad { margin: 0; font-size: 0.85rem; opacity: 0.75; }
+.card-pie { display: flex; justify-content: space-between; align-items: center; margin-top: 0.6rem; }
+.vacio { padding: 3rem; text-align: center; border: 2px dashed var(--glaseado); border-radius: 1rem; color: var(--cacao); }
+
+@keyframes aparece {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* DRAWER / PANEL DEL CARRITO */
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(61, 37, 35, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex; justify-content: flex-end;
+  animation: fadeIn 0.25s ease-out;
+}
+.drawer-contenido {
+  width: min(420px, 100%); height: 100%;
+  background: #fff; display: flex; flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  animation: slideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.drawer-cabecera {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--glaseado);
+}
+.drawer-cabecera h2 { margin: 0; font-size: 1.3rem; color: var(--cacao); }
+.btn-cerrar {
+  background: none; border: 0; font-size: 1.2rem; cursor: pointer; color: var(--cacao);
+  width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center;
+  transition: background 0.2s;
+}
+.btn-cerrar:hover { background: var(--glaseado); }
+
+.drawer-cuerpo { flex: 1; overflow-y: auto; padding: 1.5rem; }
+
+.carrito-vacio { text-align: center; padding: 3rem 1rem; color: var(--cacao); }
+.icono-vacio { font-size: 3rem; display: block; margin-bottom: 1rem; animation: flotar 3s ease-in-out infinite; }
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.lista-carrito { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.item-carrito {
+  display: grid; grid-template-columns: 60px 1fr auto; gap: 0.9rem; align-items: center;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--glaseado);
+  animation: aparece 0.3s ease-out;
+}
+.img-thumb { width: 60px; height: 60px; border-radius: 0.6rem; object-fit: cover; }
+.info-item h4 { margin: 0 0 0.2rem; font-size: 0.95rem; }
+.precio-unitario { margin: 0 0 0.4rem; font-size: 0.8rem; opacity: 0.7; }
+
+.controles-cantidad { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--crema); border-radius: 0.4rem; padding: 0.1rem 0.3rem; }
+.controles-cantidad button {
+  background: #fff; border: 1px solid var(--glaseado); width: 1.4rem; height: 1.4rem;
+  border-radius: 0.3rem; font-weight: 700; cursor: pointer; display: grid; place-items: center;
+}
+.controles-cantidad button:hover { background: var(--frambuesa); color: #fff; border-color: var(--frambuesa); }
+.controles-cantidad span { font-size: 0.85rem; font-weight: 700; min-width: 1.2rem; text-align: center; }
+
+.subtotal-item { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; }
+.btn-eliminar { background: none; border: 0; cursor: pointer; opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
+.btn-eliminar:hover { opacity: 1; transform: scale(1.15); }
+
+.drawer-pie { padding: 1.5rem; border-top: 1px solid var(--glaseado); background: var(--crema); display: grid; gap: 0.8rem; }
+.total-fila { display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; }
+.total-monto { color: var(--frambuesa); font-size: 1.4rem; }
+
+.btn-vaciar {
+  background: transparent; border: 1px solid #ccc; color: #666;
+  border-radius: 0.6rem; padding: 0.5rem; cursor: pointer; font-size: 0.85rem;
+}
+.btn-vaciar:hover { background: #eee; color: #333; }
+
+.btn-comprar {
+  background: var(--frambuesa); color: #fff; border: 0; border-radius: 0.7rem;
+  padding: 0.8rem; font-weight: 700; font-size: 1rem; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-comprar:hover { background: var(--frambuesa-oscuro); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(184, 50, 90, 0.3); }
+
+footer#contacto { position: relative; z-index: 1; padding: 2rem 5vw; background: var(--cacao); color: #f4e4e4; text-align: center; }
+
+/* ANIMACIÓN DE FONDO DE POSTRES FLOTANTES */
+.fondo-flotante-contenedor {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  overflow: hidden; opacity: 0.22;
+}
+.particula-postre {
+  position: absolute; top: -10%;
+  animation-name: lluviaPostres; animation-timing-function: linear; animation-iteration-count: infinite;
+  user-select: none; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+}
+@keyframes lluviaPostres {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(115vh) rotate(360deg); opacity: 0; }
+}
